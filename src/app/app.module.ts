@@ -9,11 +9,13 @@ import { MainContainerComponent } from './containers';
 
 // Components
 import { TemplateModule } from './modules/template/template.module';
+import { SimpleContainerComponent } from './containers/simple-container/simple-container.component';
+import { AuthLayoutComponent } from './modules/auth/auth-layout/auth-layout.component';
 
 const CONTAINERS = [MainContainerComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...CONTAINERS],
+  declarations: [AppComponent, ...CONTAINERS, SimpleContainerComponent, AuthLayoutComponent],
   imports: [BrowserModule, AppRoutingModule, TemplateModule],
   providers: [],
   bootstrap: [AppComponent],
