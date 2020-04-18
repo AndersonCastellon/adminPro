@@ -11,6 +11,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
+  {
+    path: 'chart',
+    component: MainContainerComponent,
+    loadChildren: () =>
+      import('./modules/charts/charts.module').then((m) => m.ChartsModule),
+  },
   { path: 'dashboard', component: MainContainerComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'dashboard' },
 ];
