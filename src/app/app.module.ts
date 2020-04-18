@@ -6,16 +6,16 @@ import { AppComponent } from './app.component';
 
 // Containers
 import { MainContainerComponent } from './containers';
+import { SimpleContainerComponent } from './containers';
 
 // Components
 import { TemplateModule } from './modules/template/template.module';
-import { SimpleContainerComponent } from './containers/simple-container/simple-container.component';
 import { AuthLayoutComponent } from './modules/auth/auth-layout/auth-layout.component';
 
-const CONTAINERS = [MainContainerComponent];
+const CONTAINERS = [MainContainerComponent, SimpleContainerComponent];
 
 @NgModule({
-  declarations: [AppComponent, ...CONTAINERS, SimpleContainerComponent, AuthLayoutComponent],
+  declarations: [AppComponent, ...CONTAINERS, AuthLayoutComponent],
   imports: [BrowserModule, AppRoutingModule, TemplateModule],
   providers: [],
   bootstrap: [AppComponent],
