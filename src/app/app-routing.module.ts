@@ -5,24 +5,30 @@ import { SimpleContainerComponent } from './containers/simple-container/simple-c
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: 'dashboard', component: MainContainerComponent },
   {
     path: 'auth',
     component: SimpleContainerComponent,
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
+      import('./modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: 'chart',
     component: MainContainerComponent,
     loadChildren: () =>
-      import('./modules/charts/charts.module').then((m) => m.ChartsModule),
+      import('./modules/charts/charts.module').then((m) => m.ChartsModule)
   },
-  { path: 'dashboard', component: MainContainerComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'dashboard' },
+  {
+    path: 'settings',
+    component: MainContainerComponent,
+    loadChildren: () =>
+      import('./modules/settings/settings.module').then((m) => m.SettingsModule)
+  },
+  { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -6,6 +6,8 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { RecoverComponent } from './recover/recover.component';
 import { RegisterComponent } from './register/register.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 const ROUTES: Routes = [
   {
     path: '',
@@ -13,13 +15,18 @@ const ROUTES: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'recover', component: RecoverComponent },
-      { path: 'register', component: RegisterComponent },
-    ],
-  },
+      { path: 'register', component: RegisterComponent }
+    ]
+  }
 ];
 
 @NgModule({
   declarations: [LoginComponent, RecoverComponent, RegisterComponent],
-  imports: [CommonModule, RouterModule.forChild(ROUTES)],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(ROUTES)
+  ]
 })
 export class AuthModule {}
