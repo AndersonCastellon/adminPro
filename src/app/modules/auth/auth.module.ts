@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { GoogleSigninDirective } from '../shared/directives/google-signin.directive';
+
 const ROUTES: Routes = [
   {
     path: '',
@@ -21,7 +23,12 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RecoverComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    RecoverComponent,
+    RegisterComponent,
+    GoogleSigninDirective
+  ],
   imports: [
     CommonModule,
     FormsModule,
