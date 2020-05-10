@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainContainerComponent } from './containers';
 import { SimpleContainerComponent } from './containers/simple-container/simple-container.component';
+import { LoginGuard } from './modules/shared/guards/login.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: MainContainerComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
+  {
+    path: 'dashboard',
+    canActivate: [LoginGuard],
+    component: MainContainerComponent
+  },
   {
     path: 'auth',
     component: SimpleContainerComponent,
@@ -24,7 +29,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/settings/settings.module').then((m) => m.SettingsModule)
   },
-  { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
+  { path: '**', pathMatch: 'full', redirectTo: 'auth/login' }
 ];
 
 @NgModule({

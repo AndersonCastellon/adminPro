@@ -10,7 +10,12 @@ import { User, Credential } from '../../../../models';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  private token: string;
+  private user: User;
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token') || '';
+    this.user = JSON.parse(localStorage.getItem('user')) || null;
+  }
 
   login(credentials: Credential) {
     if (credentials.remember) {
@@ -56,9 +61,25 @@ export class UserService {
     return localStorage.getItem('email');
   }
 
+  isLogged() {
+    return this.token.length > 2;
+  }
+
+  logout() {
+    this.token = null;
+    this.user = null;
+
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
   private saveUserIntoStorage(resp: any) {
     localStorage.id = resp.id;
     localStorage.token = resp.token;
     localStorage.setItem('user', JSON.stringify(resp.user));
+
+    this.token = resp.token;
+    this.user = resp.user;
   }
 }
