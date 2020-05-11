@@ -8,6 +8,10 @@ import { UserService } from '../services/users/user.service';
 export class LoginGuard implements CanActivate {
   constructor(private userService: UserService, private router: Router) {}
   canActivate(): boolean {
-    return this.userService.isLogged();
+    const canAct = this.userService.isLogged();
+    if (!canAct) {
+      this.router.navigate(['/auth/login']);
+    }
+    return canAct;
   }
 }

@@ -4,6 +4,9 @@ import { SERVER_URL } from 'src/app/config/env';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
+import * as jwt_decode from 'jwt-decode';
+import * as moment from 'moment';
+
 import { User, Credential } from '../../../../models';
 
 @Injectable({
@@ -62,7 +65,24 @@ export class UserService {
   }
 
   isLogged() {
-    return this.token.length > 2;
+    let logged = true;
+    let decoded: any;
+
+    if (!this.token) {
+      logged = false;
+    } else {
+      decoded = jwt_decode(this.token);
+    }
+
+    if (!decoded || decoded.exp <= moment().unix()) {
+      logged = false;
+    }
+
+    if (!decoded || decoded.user._id !== this.user._id) {
+      logged = false;
+    }
+
+    return logged;
   }
 
   logout() {
