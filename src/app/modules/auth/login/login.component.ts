@@ -35,12 +35,12 @@ export class LoginComponent implements OnInit {
 
     this.userService
       .login(credentials)
-      .subscribe(() => this.router.navigate(['/dashboard']));
+      .subscribe(() => (window.location.href = '#/dashboard'));
   }
 
   loginWithGoogle(gToken: string) {
     this.userService
       .loginWithGoogle(gToken)
-      .subscribe(() => this.router.navigate(['/dashboard']));
+      .subscribe(() => (window.location.href = '#/dashboard'));
   }
 }

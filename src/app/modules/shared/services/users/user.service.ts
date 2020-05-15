@@ -60,6 +60,10 @@ export class UserService {
     );
   }
 
+  getCurrentUser() {
+    return this.user;
+  }
+
   remember() {
     return localStorage.getItem('email');
   }
