@@ -8,6 +8,7 @@ import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 
 import { User, Credential } from '../../../../models';
+import { UploadImagesService } from '../upload/upload-images.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ import { User, Credential } from '../../../../models';
 export class UserService {
   private token: string;
   private user: User;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private uploadS: UploadImagesService) {
     this.token = localStorage.getItem('token') || '';
     this.user = JSON.parse(localStorage.getItem('user')) || null;
   }
@@ -58,6 +59,29 @@ export class UserService {
         return resp.user;
       })
     );
+  }
+
+  updateUser(user: User) {
+    const endPoint = SERVER_URL + `/users/${this.user._id}`;
+    return this.http
+      .put(endPoint, user, { headers: { Authorization: this.token } })
+      .pipe(
+        map((resp: any) => {
+          this.user = resp.user;
+          localStorage.setItem('user', JSON.stringify(resp.user));
+          Swal.fire(`Usuario actualizado`, resp.user.email, 'success');
+          return true;
+        })
+      );
+  }
+
+  uploadImageUser(file: File) {
+    this.uploadS
+      .uploadImg(file, this.user._id, 'users', this.token)
+      .subscribe((resp: any) => {
+        this.user.photo = resp.user.photo;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      });
   }
 
   getCurrentUser() {

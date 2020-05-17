@@ -29,6 +29,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/settings/settings.module').then((m) => m.SettingsModule)
   },
+  {
+    path: 'profile',
+    component: MainContainerComponent,
+    loadChildren: () =>
+      import('./modules/profile/profile.module').then((m) => m.ProfileModule)
+  },
   { path: '**', pathMatch: 'full', redirectTo: 'auth/login' }
 ];
 

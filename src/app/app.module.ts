@@ -18,6 +18,6 @@ const CONTAINERS = [MainContainerComponent, SimpleContainerComponent];
   declarations: [AppComponent, ...CONTAINERS, AuthLayoutComponent],
   imports: [BrowserModule, AppRoutingModule, TemplateModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
